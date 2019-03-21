@@ -1,3 +1,22 @@
 <resources>
-    <string name="app_name">LinkDevMVVM</string>
+    <string name="app_name">LinkDevTask</string>
+    <string name="str_menu_explore">Explore</string>
+    <string name="str_menu_live_chat">Live Chat</string>
+    <string name="str_menu_gallery">Gallery</string>
+    <string name="str_menu_wish_list">Wish List</string>
+    <string name="str_menu_e_magazine">E-Magazine</string>
+    <string name="str_welcome">Welcome</string>
+    <string name="str_tony_roshdy">Tony Roshdy</string>
+    <string name="link_development">LINK DEVELOPMENT</string>
+    <string name="by">By</string>
+
+    <string name="error_communicating_with_server">Error in communicating with server</string>
+    <string name="error_network">Error in network</string>
+    <string name="search">Search</string>
+    <string name="no_data_to_show">No data to show</string>
+    <string name="no_apps_can_resolve_the_intent">Sorry,No apps can resolve the intent</string>
+
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="open_website">OPEN WEBSITE</string>
 </resources>
