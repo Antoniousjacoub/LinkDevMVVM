@@ -1,6 +1,8 @@
 package com.example.linkdevmvvm.adapters;
 
+import android.arch.lifecycle.Observer;
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+;
 
-import com.example.antonio.linkdevtask.R;
-import com.example.antonio.linkdevtask.dataModel.Article;
-import com.example.antonio.linkdevtask.utils.Utils;
+import com.android.databinding.library.baseAdapters.BR;
+import com.example.linkdevmvvm.R;
+import com.example.linkdevmvvm.dataModel.Article;
+import com.example.linkdevmvvm.dataModel.NewsFeedResponse;
+import com.example.linkdevmvvm.databinding.ItemNewsFeedBinding;
+import com.example.linkdevmvvm.utils.Utils;
 
 import java.util.List;
 
@@ -30,33 +36,38 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHo
     private OnItemNewsClicked onItemNewsClicked;
 
     // data is passed into the constructor
-    public NewsFeedAdapter(Context context, List<Article> data, OnItemNewsClicked onItemNewsClicked) {
+    public NewsFeedAdapter(Context context, List<Article> data) {
         this.mData = data;
         this.context = context;
-        this.onItemNewsClicked = onItemNewsClicked;
     }
 
     // inflates the row layout from xml when needed
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_news_feed, parent, false);
-        return new ViewHolder(view);
+//        View view = LayoutInflater.from(context).inflate(R.layout.item_news_feed, parent, false);
+//        return new ViewHolder(view);
+
+        ItemNewsFeedBinding binding = DataBindingUtil.inflate(
+                LayoutInflater.from(parent.getContext()),
+                R.layout.item_news_feed, parent, false);
+        return new ViewHolder(binding);
     }
 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Article article = mData.get(position);
-        holder.tvAuthor.setText(Utils.validString(article.getAuthor()));
-        holder.tvNewsFeedTitle.setText(Utils.validString(article.getTitle()));
-        holder.tvPublishDate.setText(Utils.parseDate(article.getPublishedAt()));
-        Utils.loadImageWithGlide(context, holder.imgNewsFeed, article.getUrlToImage());
-
-        holder.cardView.setOnClickListener(v -> {
-            if (onItemNewsClicked != null)
-                onItemNewsClicked.onItemNewsClicked(mData.get(position), position);
-        });
+//        holder.tvAuthor.setText(Utils.validString(article.getAuthor()));
+//        holder.tvNewsFeedTitle.setText(Utils.validString(article.getTitle()));
+//        holder.tvPublishDate.setText(Utils.parseDate(article.getPublishedAt()));
+//        Utils.loadImageWithGlide(context, holder.imgNewsFeed, article.getUrlToImage());
+//
+//        holder.cardView.setOnClickListener(v -> {
+//            if (onItemNewsClicked != null)
+//                onItemNewsClicked.onItemNewsClicked(mData.get(position), position);
+//        });
+        holder.bind(article);
 
     }
 
@@ -77,20 +88,33 @@ public class NewsFeedAdapter extends RecyclerView.Adapter<NewsFeedAdapter.ViewHo
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.img_news_feed)
-        ImageView imgNewsFeed;
-        @BindView(R.id.tv_news_feed_title)
-        TextView tvNewsFeedTitle;
-        @BindView(R.id.tv_author)
-        TextView tvAuthor;
-        @BindView(R.id.tv_publish_date)
-        TextView tvPublishDate;
-        @BindView(R.id.card_view)
-        CardView cardView;
+//        @BindView(R.id.img_news_feed)
+//        ImageView imgNewsFeed;
+//        @BindView(R.id.tv_news_feed_title)
+//        TextView tvNewsFeedTitle;
+//        @BindView(R.id.tv_author)
+//        TextView tvAuthor;
+//        @BindView(R.id.tv_publish_date)
+//        TextView tvPublishDate;
+//        @BindView(R.id.card_view)
+//        CardView cardView;
+//
+//        ViewHolder(View view) {
+//            super(view);
+//            ButterKnife.bind(this, view);
+//        }
 
-        ViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
+        ItemNewsFeedBinding itemRowBinding;
+
+         ViewHolder(ItemNewsFeedBinding itemRowBinding) {
+            super(itemRowBinding.getRoot());
+            this.itemRowBinding = itemRowBinding;
         }
+
+         void bind(Article article) {
+            itemRowBinding.setVariable(BR.artical, article);
+            itemRowBinding.executePendingBindings();
+        }
+
     }
 }
