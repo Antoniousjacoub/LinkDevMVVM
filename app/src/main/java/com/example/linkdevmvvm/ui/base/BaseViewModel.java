@@ -2,7 +2,6 @@ package com.example.linkdevmvvm.ui.base;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
-
 import android.databinding.ObservableBoolean;
 import android.support.annotation.NonNull;
 
@@ -15,11 +14,10 @@ import retrofit2.Call;
 
 public abstract class BaseViewModel extends AndroidViewModel {
 
-    @Inject
-     ServicesInterface servicesInterface;
-
     private final ObservableBoolean mIsLoading = new ObservableBoolean();
-
+    private final ObservableBoolean mIsRefreshing = new ObservableBoolean();
+    @Inject
+    ServicesInterface servicesInterface;
     private Call call;
 
 
@@ -31,18 +29,20 @@ public abstract class BaseViewModel extends AndroidViewModel {
 
     @Override
     protected void onCleared() {
-        if (call!=null) {
+        if (call != null) {
             call.cancel();
         }
         super.onCleared();
     }
 
-    protected ServicesInterface getServicesInterface(){
+    protected ServicesInterface getServicesInterface() {
         return servicesInterface;
     }
-    protected void setCurrentRetrofitCall(Call currentRetrofitCall){
-       this.call= currentRetrofitCall;
+
+    protected void setCurrentRetrofitCall(Call currentRetrofitCall) {
+        this.call = currentRetrofitCall;
     }
+
     public ObservableBoolean getIsLoading() {
         return mIsLoading;
     }
@@ -51,4 +51,11 @@ public abstract class BaseViewModel extends AndroidViewModel {
         mIsLoading.set(isLoading);
     }
 
+    public ObservableBoolean getIsRefreshing() {
+        return mIsRefreshing;
+    }
+
+    public void setIsRefreshing(boolean isRefreshing) {
+        mIsRefreshing.set(isRefreshing);
+    }
 }

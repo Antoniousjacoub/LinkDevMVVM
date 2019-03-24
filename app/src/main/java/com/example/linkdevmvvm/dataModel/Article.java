@@ -1,8 +1,12 @@
 package com.example.linkdevmvvm.dataModel;
 
+import android.databinding.BindingAdapter;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.linkdevmvvm.utils.Utils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -56,6 +60,16 @@ public class Article implements Parcelable {
     }
 
     public Article() {
+    }
+
+    @BindingAdapter({"imageUrl"})
+    public static void loadImage(ImageView view, String imageUrl) {
+        Utils.loadImageWithGlide(view.getContext(), view, imageUrl);
+    }
+
+    @BindingAdapter({"dateFormat"})
+    public static void dateFormat(TextView textView, String publishedAt) {
+        textView.setText(Utils.parseDate(publishedAt));
     }
 
     public String getAuthor() {

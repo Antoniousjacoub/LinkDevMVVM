@@ -1,8 +1,5 @@
 package com.example.linkdevmvvm.service;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
-
 import com.example.linkdevmvvm.dataModel.NewsFeedResponse;
 
 import retrofit2.Call;

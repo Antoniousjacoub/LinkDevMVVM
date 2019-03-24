@@ -9,11 +9,11 @@ import com.example.linkdevmvvm.dagger.module.NetworkingModule;
 import com.example.linkdevmvvm.utils.Constants;
 
 public class App extends Application {
+    private static NetworkingComponent mNetworkingComponent;
+
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
-
-    private static NetworkingComponent mNetworkingComponent;
 
     public static NetworkingComponent getNetComponent() {
         return mNetworkingComponent;

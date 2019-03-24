@@ -1,6 +1,6 @@
 package com.example.linkdevmvvm.utils;
 
-import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +14,9 @@ import com.example.linkdevmvvm.R;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 
 /**
  * Created by antonio on 1/16/19.
@@ -25,7 +28,6 @@ public class Utils {
 
         if (context == null || imageView == null || URL == null)
             return;//early if found one of them with null value
-
         Glide.with(context)
                 .load(URL)
                 .apply(new RequestOptions().error(R.drawable.placeholder).placeholder(R.drawable.placeholder))
@@ -51,7 +53,7 @@ public class Utils {
     }
 
 
-    public static void openWebsiteOnBrowser(Activity activity, String url) {
+    public static void openWebsiteOnBrowser(Application activity, String url) {
         if (url == null || url.equals(""))
             return;//we don't need to open website if this check is true
 
@@ -63,6 +65,7 @@ public class Utils {
 
         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
         if (intent.resolveActivity(activity.getPackageManager()) != null) {
+            intent.setFlags(FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);
         } else {
             showMessage(activity, activity.getString(R.string.no_apps_can_resolve_the_intent));
@@ -74,8 +77,8 @@ public class Utils {
             return "";
         String inputPattern = "yyyy-MM-dd";
         String outputPattern = "MMM dd, yyyy";
-        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
-        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern, Locale.ENGLISH);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern, Locale.ENGLISH);
         try {
             Date date = inputFormat.parse(oldDateFormat);
             return outputFormat.format(date);

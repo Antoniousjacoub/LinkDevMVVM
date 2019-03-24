@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="artical"
             type="com.example.linkdevmvvm.dataModel.Article" />
+
+        <variable
+            name="itemClickListener"
+            type="com.example.linkdevmvvm.adapters.NewsFeedAdapter.OnItemNewsClicked" />
     </data>
+
     <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
@@ -13,6 +20,7 @@
         android:layout_marginStart="@dimen/dp_16"
         android:layout_marginTop="@dimen/dp_16"
         android:layout_marginEnd="@dimen/dp_16"
+        android:onClick="@{v->itemClickListener.onItemNewsClicked(artical)}"
         app:cardCornerRadius="@dimen/dp_2"
         app:cardElevation="@dimen/dp_2">
 
@@ -29,7 +37,7 @@
                 android:adjustViewBounds="true"
                 android:maxHeight="@dimen/dp_300"
                 android:src="@drawable/placeholder"
-
+                bind:imageUrl="@{artical.urlToImage}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +98,8 @@
                 android:layout_marginBottom="@dimen/dp_8"
                 android:gravity="end"
                 android:lines="@integer/one_line"
+                bind:dateFormat="@{artical.publishedAt}"
                 android:textSize="@dimen/text_size_small"
-                android:text="@{artical.publishedAt}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

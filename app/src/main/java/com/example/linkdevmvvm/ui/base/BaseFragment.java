@@ -19,7 +19,8 @@ public abstract class BaseFragment<D extends ViewDataBinding, M extends BaseView
 
     protected abstract int getBindingVariable();
 
-    protected abstract @LayoutRes int getLayoutId();
+    protected abstract @LayoutRes
+    int getLayoutId();
 
     protected abstract M getViewModel();
 
@@ -30,14 +31,14 @@ public abstract class BaseFragment<D extends ViewDataBinding, M extends BaseView
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        performDataBinding(inflater,container,savedInstanceState);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        performDataBinding(inflater, container);
+        return getViewDataBinding().getRoot();
 
     }
 
-    private void performDataBinding(LayoutInflater layoutInflater,ViewGroup viewGroup,Bundle bundle) {
-        if (getActivity()==null)return;
-        mViewDataBinding = DataBindingUtil.inflate(layoutInflater, getLayoutId(),viewGroup,false);
+    private void performDataBinding(LayoutInflater layoutInflater, ViewGroup viewGroup) {
+        if (getActivity() == null) return;
+        mViewDataBinding = DataBindingUtil.inflate(layoutInflater, getLayoutId(), viewGroup, false);
         this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();

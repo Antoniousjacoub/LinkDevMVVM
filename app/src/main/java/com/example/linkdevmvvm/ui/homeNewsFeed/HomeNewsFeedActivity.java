@@ -1,4 +1,5 @@
 package com.example.linkdevmvvm.ui.homeNewsFeed;
+
 import android.os.Bundle;
 
 import com.example.linkdevmvvm.R;

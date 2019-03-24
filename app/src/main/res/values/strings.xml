@@ -19,4 +19,5 @@
     <string name="close">Close</string>
     <string name="open">Open</string>
     <string name="open_website">OPEN WEBSITE</string>
+    <string name="somthing_went_wrong">Somthing went wrong</string>
 </resources>

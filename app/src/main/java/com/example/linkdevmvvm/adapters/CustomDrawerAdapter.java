@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.example.linkdevmvvm.R;
 import com.example.linkdevmvvm.dataModel.DrawerItem;
 

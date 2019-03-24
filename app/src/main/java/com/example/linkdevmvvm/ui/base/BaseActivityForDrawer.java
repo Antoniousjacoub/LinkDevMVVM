@@ -9,9 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.widget.FrameLayout;
 
-
 import com.example.linkdevmvvm.R;
-
 import com.example.linkdevmvvm.adapters.CustomDrawerAdapter;
 import com.example.linkdevmvvm.dataModel.DrawerItem;
 import com.example.linkdevmvvm.utils.Utils;
