@@ -17,7 +17,6 @@ public class NewsDetailsFragment extends BaseFragment<FragmentNewsDetailsBinding
 
     public static final String TAG = "NewsDetailsFragmentTag";
     public static String ARTICLE_KEY = "ARTICLE_KEY";
-    private String urlArticle;
     private Context context;
     private NewsDetailsViewModel newsDetailsViewModel;
     private FragmentNewsDetailsBinding fragmentNewsDetailsBinding;
@@ -57,7 +56,6 @@ public class NewsDetailsFragment extends BaseFragment<FragmentNewsDetailsBinding
     private void onSetDataOnView(Article article) {
         if (article == null)
             return;
-        urlArticle = article.getUrl();
         fragmentNewsDetailsBinding.tvAuthor.setText(Utils.validString(article.getAuthor()));
         fragmentNewsDetailsBinding.tvNewsFeedTitle.setText(Utils.validString(article.getTitle()));
         fragmentNewsDetailsBinding.tvNewsDetailsDesc.setText(Utils.validString(article.getDescription()));
